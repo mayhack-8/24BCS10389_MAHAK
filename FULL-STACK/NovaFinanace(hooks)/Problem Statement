@@ -1,0 +1,35 @@
+//problem statement
+Title: Nova Financial: Investment Analytics Dashboard
+
+Description:
+You are building an Investment Analytics Dashboard for a portfolio management app. The dashboard fetches market holding records, allows users to filter asset names, toggle between viewing asset classes, and change currency display preferences.
+
+Sorting, filtering, and performing financial calculations over asset arrays can cause unnecessary re-renders. You must optimize the computed financial values using useMemo so that heavy calculations only re-run when relevant data changes—not when unrelated state (such as the display currency preference) updates.
+
+Task Requirements:
+Implement your solution inside the provided App.jsx file.
+
+1. Data Fetching & Side Effects (useEffect)
+Initial Data Load: On component mount, simulate fetching portfolio data using setTimeout. After exactly 600ms, populate the assets state with the provided MOCK_ASSETS array and set loading to false.
+
+Document Title Update: Create a second useEffect that updates document.title to: "Portfolio - Total: ${formattedTotal}", where {formattedTotal} is the totalValue calculated from the current filtered assets list.
+
+2. Optimized Computations (useMemo)
+Implement a single useMemo hook to calculate an object returning { filteredAssets, totalValue }:
+
+Filtering: Include assets where name matches searchTerm (case-insensitive) AND assetClass matches selectedCategory (if selectedCategory is "All", do not filter by category).
+
+Total Value Calculation: Compute totalValue by summing quantity * currentPrice across all filtered assets.
+
+Optimization Tracker: Inside your useMemo callback, you must include this exact line of code so the test suite can verify your optimization:
+
+JavaScript
+window.analyticsMemoCount = (window.analyticsMemoCount || 0) + 1;
+Dependency Array: Ensure useMemo depends only on assets, searchTerm, and selectedCategory. Changing currency must not trigger useMemo.
+
+3. Component Composition & Props Passing
+<FilterBar/> Component: Pass searchTerm, setSearchTerm, selectedCategory, setSelectedCategory, currency, and setCurrency as props to this child component.
+
+<PortfolioMetrics/> Component: Pass totalValue, currency, and assetCount (filteredAssets.length) as props.
+
+<AssetTable/> Component: Pass filteredAssets as a prop named assets and currency as a prop named currency.
