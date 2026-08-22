@@ -1,0 +1,51 @@
+TechGear Product Catalog
+Objective
+Build a mini React application using react-router-dom that allows users to:
+Browse products.
+Filter products using Query Parameters (?category=...&maxPrice=...).
+View specific product details using Dynamic Route Parameters (/product/:productId).
+Starter Data
+Create a file named productsData.js and paste the following array:
+const PRODUCTS = [
+  { id: '1', name: 'Wireless Headphones', category: 'audio', price: 150 },
+  { id: '2', name: 'Bluetooth Speaker', category: 'audio', price: 80 },
+  { id: '3', name: 'Mechanical Keyboard', category: 'peripherals', price: 120 },
+  { id: '4', name: 'Ergonomic Mouse', category: 'peripherals', price: 60 },
+  { id: '5', name: '4K Monitor', category: 'display', price: 350 },
+];
+Task Instructions
+Requirement 1: Navigation Bar 
+Create a persistent <nav> component at the top of the application using <Link>.
+Include links to:
+All Products: /products
+Audio Only: /products?category=audio
+Under $100: /products?maxPrice=100
+Requirement 2: Product Catalog (/products) 
+Create a ProductCatalog component rendered at /products using useSearchParams.
+Read Parameters:
+Extract category and maxPrice values from the URL query string.
+Filter Products:
+Filter the PRODUCTS array based on the active query parameter values.
+Interactive Filter Controls:
+Add a <select> dropdown for categories (audio, peripherals, display).
+Add an <input type="number"> for maxPrice.
+Updating either control must update the URL using setSearchParams().
+Add a "Clear Filters" button that resets search parameters to /products.
+Display List:
+Render each matching product's name and price.
+Attach a link to each item leading to /product/:productId.
+Requirement 3: Product Details (/product/:productId) 
+Create a ProductDetails component rendered at /product/:productId using useParams.
+Read Dynamic Route:
+Extract productId from the dynamic path segment.
+Display Product:
+Find and render the product details (Name, Price, Category, ID) matching productId.
+If no match exists, display "Product not found!".
+Back Navigation:
+Add a <Link to="/products"> button to navigate back to the catalog.
+Requirement 4: Verification Check 
+Test your implementation against these manual scenarios:
+Scenario A: Typing /product/103 in the browser bar renders the Mechanical Keyboard page directly.
+Scenario B: Selecting "audio" from the dropdown updates the browser address bar to ?category=audio without a page refresh.
+Scenario C: Reloading the page at /products?category=audio&maxPrice=100 preserves the filtered state automatically.
+
